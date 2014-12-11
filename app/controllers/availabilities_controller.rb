@@ -56,7 +56,8 @@ class AvailabilitiesController < ApplicationController
 
   def availability_params
     params.require(:availability).permit('start_time(1s)', 'start_time(4i)',
-                                         'start_time(5i)', :start_time,
+                                         'start_time(5i)', :hour, :minute, :ampm,
+                                         :start_time,
                                          :duration, :timezone, :location,
                                          :setup_recurring, :recur_weekly,
                                          :recur_num, :city)
@@ -64,11 +65,15 @@ class AvailabilitiesController < ApplicationController
 
   def format_start_time(time_params)
     return time_params unless time_params['start_time(1s)']
-    new_time_params = time_params.clone
+    new_time_params  = time_params.clone
     year, month, day = new_time_params.delete('start_time(1s)').split('-')
     new_time_params['start_time(1i)'] = year
     new_time_params['start_time(2i)'] = month
     new_time_params['start_time(3i)'] = day
+    #
+    new_time_params['start_time'] = time_params[:hour].to_s + ":" + time_params[:minute].to_s + ":" + time_params[:ampm].to_s
+    #
+
     new_time_params
   end
 
