@@ -70,9 +70,14 @@ class AvailabilitiesController < ApplicationController
     new_time_params['start_time(1i)'] = year
     new_time_params['start_time(2i)'] = month
     new_time_params['start_time(3i)'] = day
-    #
-    new_time_params['start_time'] = time_params[:hour].to_s + ":" + time_params[:minute].to_s + ":" + time_params[:ampm].to_s
-    #
+
+    # new_time_params['start_time(5i)'] = minute
+
+    # if time_params[:ampm] == "PM"
+    #   time_params['start_time(4i)'] = hour.to_i + 12
+    # else
+    #   time_params['start_time(4i)'] = hour.to_i
+    # end
 
     new_time_params
   end
