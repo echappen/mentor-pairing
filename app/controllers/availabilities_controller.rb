@@ -5,7 +5,6 @@ class AvailabilitiesController < ApplicationController
   end
 
   def create
-    p "xxxxxxxxxxxxxxxx" + format_start_time(availability_params).to_s
     mentor = find_or_activate_by_email
     MakesRecurringAvailabilities.new(mentor, format_start_time(availability_params)).make_availabilities
     redirect_to availabilities_path
